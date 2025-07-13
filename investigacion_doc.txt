@@ -1,0 +1,102 @@
+Absolutamente. He analizado las tres propuestas y las he sintetizado en un único documento maestro. Este plan consolidado integra las mejores ideas de cada uno, elimina redundancias y se estructura siguiendo las mejores prácticas de la ingeniería de software para garantizar un resultado de máxima calidad.
+
+Aquí está el plan de investigación y requisitos definitivo.
+
+---
+
+### **Documento Maestro de Requisitos e Investigación: "Project Zenith"**
+
+**Versión:** 2.0 (Consolidada)
+**Fecha:** 13 de Julio de 2024
+**Autor:** Ingeniero de Software y Sistemas Senior
+
+#### **1. Visión y Misión del Producto**
+
+**Visión:** Convertirse en la herramienta de optimización de Windows de referencia, reconocida por su **eficacia, seguridad y total transparencia**.
+
+**Lema:** *"El control y la velocidad, devueltos al usuario."*
+
+**Misión:** Desarrollar una aplicación potente y ligera en Python/Tkinter que se diferencie de la competencia eliminando prácticas opacas. Nos centraremos en la claridad, la educación del usuario y el uso exclusivo de técnicas legítimas y documentadas para mejorar el rendimiento, la estabilidad y la privacidad del sistema.
+
+#### **2. Análisis de Mercado y Diferenciación Competitiva**
+
+*   **Competidores Analizados:** CCleaner, IObit Advanced SystemCare, BleachBit, AVG TuneUp.
+*   **Debilidades del Mercado:**
+    *   **Falta de Confianza:** Muchos competidores han sido criticados por incluir adware, realizar cambios agresivos sin explicación o por brechas de seguridad.
+    *   **Bloatware:** Las herramientas que deberían acelerar el sistema a menudo son pesadas y consumen recursos.
+    *   **Interfaces Anticuadas o Confusas:** Las UIs no siempre son intuitivas para el usuario no técnico.
+*   **Nuestra Oportunidad y Diferenciación Clave:**
+    *   **Transparencia Radical:** Cada acción será explicada. El usuario verá qué se va a eliminar o modificar *antes* de que suceda. No habrá telemetría oculta.
+    *   **Seguridad como Prioridad:** Implementaremos múltiples salvaguardas, copias de seguridad automáticas para acciones críticas y nos abstendremos de modificaciones riesgosas no probadas.
+    *   **Rendimiento Nativo:** La aplicación será extremadamente ligera. No debe impactar el rendimiento que busca mejorar.
+    *   **UI Moderna y Dual:** Una interfaz limpia y minimalista, inspirada en Windows 11, con un "Modo Fácil" (un clic) y un "Modo Avanzado" (control granular).
+
+#### **3. Público Objetivo (Target Audience)**
+
+1.  **Usuario Básico:** Busca una solución rápida y segura ("un solo clic"). Valora la simplicidad y teme dañar su PC.
+2.  **Usuario Avanzado (Power User):** Exige control total, vistas detalladas, logs, personalización y la capacidad de revertir cambios.
+
+Nuestra UI de modo dual satisfará a ambos perfiles sin compromiso.
+
+#### **4. Stack Tecnológico y Arquitectura**
+
+*   **Lenguaje de Programación:** **Python 3.10+** (Desarrollo rápido, ecosistema maduro).
+*   **Framework de UI:** **Tkinter** con la librería **CustomTkinter**. Esta combinación nos da una base estable y ligera con una apariencia visual moderna y personalizable, crucial para la aceptación del usuario.
+*   **Arquitectura:**
+    *   **Backend Desacoplado:** Scripts de Python modulares que manejan la lógica de negocio (limpieza, optimización, etc.). Esto facilita las pruebas y el mantenimiento.
+    *   **Frontend Responsivo:** La UI de CustomTkinter se comunicará con el backend. Se usará **`threading`** para ejecutar tareas largas (escaneos, limpieza) en segundo plano, manteniendo la interfaz siempre fluida y sin congelarse.
+*   **Librerías Clave:**
+    *   `psutil`: Para monitorización de recursos (CPU, RAM, disco) y gestión de procesos.
+    *   `winreg`: Para el acceso seguro y nativo al Registro de Windows.
+    *   `ctypes` / `pywin32`: Para interactuar con la API de Windows, solicitar elevación de privilegios (UAC) y gestionar servicios.
+    *   `os`, `shutil`: Para operaciones con el sistema de archivos.
+    *   `subprocess`: Para ejecutar comandos del sistema como `ipconfig` o `defrag`.
+*   **Empaquetado y Distribución:**
+    *   **PyInstaller:** Para compilar todo en un único archivo `.exe` portable y sin dependencias.
+    *   **Inno Setup:** Para crear un instalador profesional que gestione accesos directos, entradas en el registro y ofrezca una experiencia de instalación limpia.
+
+#### **5. Requisitos Funcionales (Definición de Módulos)**
+
+Se priorizará el desarrollo en fases, comenzando con un **Producto Mínimo Viable (MVP)** enfocado en las ganancias más seguras y evidentes para el usuario.
+
+| Módulo | Funcionalidad | Prioridad |
+| :--- | :--- | :--- |
+| **Dashboard** | Pantalla principal con resumen del sistema (RAM, CPU, Disco) y botón de "Análisis Inteligente". | **MVP** |
+| **Limpiador** | **Limpieza del Sistema:** Temporales, Papelera, Caché de Miniaturas, Caché de Windows Update. | **MVP** |
+| | **Limpieza de Navegadores:** (Chrome, Firefox, Edge) Caché, Historial, Cookies (con selección). | **MVP** |
+| **Optimizador** | **Gestor de Inicio:** Listar, habilitar/deshabilitar aplicaciones que arrancan con Windows. | **MVP** |
+| | **Gestor de Servicios:** Presets ("Seguro", "Avanzado") para deshabilitar servicios no esenciales. | Post-MVP |
+| | **Optimizador de RAM:** Liberar memoria finalizando procesos seguros en segundo plano. | Post-MVP |
+| | **Optimizador de Disco:** Desfragmentación inteligente (solo para HDD, ignorar SSD). | Post-MVP |
+| **Herramientas** | **Información del Sistema:** Panel detallado de hardware (CPU, GPU, RAM, Placa Base). | **MVP** |
+| | **Desinstalador de Programas:** Desinstalación limpia con escaneo de archivos y registros residuales. | Post-MVP |
+| | **Buscador de Archivos Grandes:** Visualizador de espacio en disco para liberar espacio manualmente. | Post-MVP |
+| **Seguridad** | **Limpiador de Registro (Alto Riesgo):** Búsqueda de entradas obsoletas. | **Expansión Futura** |
+| | **Puntos de Restauración:** Creación y gestión de puntos de restauración del sistema. | **MVP** (para el limpiador de registro) |
+
+#### **6. Requisitos No Funcionales (Atributos de Calidad)**
+
+*   **Seguridad:**
+    *   La aplicación debe solicitar elevación de privilegios (UAC) al inicio de forma transparente (`ctypes.windll.shell32.IsUserAnAdmin()`).
+    *   **Creación automática y obligatoria de un punto de restauración** antes de realizar operaciones críticas (limpieza de registro, gestión de servicios).
+    *   Las listas de archivos/claves a eliminar estarán predefinidas y validadas para evitar daños al sistema.
+*   **Rendimiento de la App:** La aplicación debe tener un bajo consumo de CPU y RAM. Se usará profiling (`cProfile`) durante el desarrollo para optimizar cuellos de botella.
+*   **Transparencia:** Mostrar siempre un resumen claro de las acciones a realizar y el espacio a recuperar. Ofrecer logs detallados de todas las operaciones.
+*   **Usabilidad (UI/UX):** Interfaz intuitiva con explicaciones claras. Indicadores de progreso visibles y feedback constante al usuario.
+*   **Compatibilidad:** Soporte completo y probado para **Windows 10 y Windows 11 (64 bits)**.
+
+#### **7. Roadmap de Desarrollo (Fases del Proyecto)**
+
+| Fase | Tareas Principales | Entregable Clave |
+| :--- | :--- | :--- |
+| **1. Diseño y Prototipado** | Crear mockups de la UI con CustomTkinter para los modos "Fácil" y "Avanzado". Definir el flujo de usuario. | Prototipo visual interactivo. |
+| **2. Desarrollo del Backend (Core)** | Implementar la lógica para los módulos del MVP en scripts de Python modulares y bien documentados. | Librería de funciones de optimización. |
+| **3. Desarrollo del Frontend (MVP)** | Construir la interfaz de usuario del MVP y conectarla al backend, asegurando la responsividad con `threading`. | Primera versión funcional interna de la app. |
+| **4. Integración y Pruebas Alfa** | Pruebas exhaustivas en máquinas virtuales (Win10, Win11) para garantizar la estabilidad y seguridad. | Versión Alfa estable. |
+| **5. Desarrollo de Funciones Avanzadas** | Implementar los módulos Post-MVP (Desinstalador, Optimizador de RAM, etc.). | Versión Beta con todas las funcionalidades. |
+| **6. Beta Testing y Empaquetado** | Liberar la versión Beta a un grupo cerrado de usuarios para feedback. Crear el ejecutable `.exe` y el instalador. | Instalador `.msi` o `.exe`. |
+| **7. Lanzamiento y Documentación** | Publicación de la versión 1.0. Crear una guía de usuario completa y una sección de Preguntas Frecuentes. | Producto final y materiales de soporte. |
+
+---
+
+Este plan unificado proporciona una hoja de ruta robusta y profesional. Combina una visión de producto sólida con requisitos técnicos detallados y un plan de ejecución realista, sentando las bases para crear el mejor software de su categoría.
